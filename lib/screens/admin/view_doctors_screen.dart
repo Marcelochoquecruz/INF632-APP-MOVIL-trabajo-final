@@ -185,6 +185,7 @@ class _ViewDoctorsScreenState extends State<ViewDoctorsScreen> {
                           vertical: 8, horizontal: 16),
                       child: ExpansionTile(
                         leading: CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
                           child: Text(
                             (data['name'] as String? ?? '?').substring(0, 1).toUpperCase(),
                             style: const TextStyle(
@@ -192,7 +193,6 @@ class _ViewDoctorsScreenState extends State<ViewDoctorsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          backgroundColor: Theme.of(context).primaryColor,
                         ),
                         title: Text(
                           data['name'] as String? ?? 'Sin nombre',

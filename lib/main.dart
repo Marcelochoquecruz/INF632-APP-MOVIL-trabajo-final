@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            elevation: 2,
+            backgroundColor: Colors.white,
+          ),
         ),
         routes: AppRoutes.getRoutes(),
         initialRoute: AppRoutes.home,

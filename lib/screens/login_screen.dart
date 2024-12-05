@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/custom_app_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -95,9 +96,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login - $title'),
-        backgroundColor: color,
+      appBar: const CustomAppBar(
+        title: 'Iniciar Sesión',
+        showBackButton: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

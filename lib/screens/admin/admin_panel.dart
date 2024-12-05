@@ -64,7 +64,6 @@ class _AdminPanelState extends State<AdminPanel> {
       appBar: AppBar(
         title: const Text(
           'Panel Administrativo',
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(

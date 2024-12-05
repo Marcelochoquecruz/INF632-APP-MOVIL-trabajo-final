@@ -178,6 +178,7 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
                           vertical: 8, horizontal: 16),
                       child: ExpansionTile(
                         leading: CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
                           child: Text(
                             (data['name'] as String? ?? '?').substring(0, 1).toUpperCase(),
                             style: const TextStyle(
@@ -185,7 +186,6 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          backgroundColor: Theme.of(context).primaryColor,
                         ),
                         title: Text(
                           data['name'] as String? ?? 'Sin nombre',
@@ -302,8 +302,8 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
         onPressed: () {
           Navigator.pushNamed(context, '/register-patient');
         },
-        child: const Icon(Icons.add),
         tooltip: 'Registrar nuevo paciente',
+        child: const Icon(Icons.add),
       ),
     );
   }
