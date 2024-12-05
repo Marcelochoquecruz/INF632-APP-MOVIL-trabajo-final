@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 import '../controllers/auth_controller.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

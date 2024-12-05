@@ -17,11 +17,11 @@ class ThemeProvider with ChangeNotifier {
     useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: const Color(0xFF1A73E8),
-    colorScheme: ColorScheme.light(
-      primary: const Color(0xFF1A73E8),
-      secondary: const Color(0xFF34A853),
+    colorScheme: const ColorScheme.light(
+      primary: Color(0xFF1A73E8),
+      secondary: Color(0xFF34A853),
       surface: Colors.white,
-      error: const Color(0xFFDC3545),
+      error: Color(0xFFDC3545),
     ),
     textTheme: GoogleFonts.poppinsTextTheme(),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -48,7 +48,6 @@ class ThemeProvider with ChangeNotifier {
       primary: Color(0xFF4285F4),
       secondary: Color(0xFF34A853),
       surface: Color(0xFF424242),
-      background: Color(0xFF303030),
       error: Color(0xFFDC3545),
     ),
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),

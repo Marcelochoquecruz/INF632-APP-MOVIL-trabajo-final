@@ -28,7 +28,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
     setState(() => _isLoading = true);
 
-    final userType = ModalRoute.of(context)!.settings.arguments as UserType;
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+    if (arguments == null) {
+      setState(() => _isLoading = false);
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/');
+      }
+      return;
+    }
+
+    final userType = arguments as UserType;
     final authController = context.read<AuthController>();
 
     final success = await authController.signIn(
@@ -40,7 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      Navigator.pushReplacementNamed(context, '/welcome');
+      if (userType == UserType.admin) {
+        Navigator.pushReplacementNamed(context, '/admin-panel');
+      } else {
+        Navigator.pushReplacementNamed(context, '/welcome');
+      }
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -53,7 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userType = ModalRoute.of(context)!.settings.arguments as UserType;
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+    if (arguments == null) {
+      // Si no hay argumentos, redirigir a la pantalla de inicio
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, '/');
+      });
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final userType = arguments as UserType;
     String title;
     Color color;
 
