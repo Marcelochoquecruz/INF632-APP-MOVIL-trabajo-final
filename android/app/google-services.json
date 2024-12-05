@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "259583360737",
+    "project_id": "consulta-617fc",
+    "storage_bucket": "consulta-617fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259583360737:android:327438a0b2ccd6df1d41a0",
+        "android_client_info": {
+          "package_name": "com.example.consulta1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCccw9356q__YxO3jbyITr5qKFJbwBz_w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
