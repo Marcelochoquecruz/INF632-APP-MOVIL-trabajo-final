@@ -15,8 +15,8 @@ class ConsultaModel {
     this.status = 'pendiente',
     DateTime? createdAt,
     DateTime? updatedAt,
-  })  : this.createdAt = createdAt ?? DateTime.now(),
-        this.updatedAt = updatedAt ?? DateTime.now();
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
     return {

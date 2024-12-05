@@ -21,7 +21,6 @@ class ThemeProvider with ChangeNotifier {
       primary: const Color(0xFF1A73E8),
       secondary: const Color(0xFF34A853),
       surface: Colors.white,
-      background: Colors.grey[50]!,
       error: const Color(0xFFDC3545),
     ),
     textTheme: GoogleFonts.poppinsTextTheme(),
@@ -45,12 +44,12 @@ class ThemeProvider with ChangeNotifier {
     useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF4285F4),
-    colorScheme: ColorScheme.dark(
-      primary: const Color(0xFF4285F4),
-      secondary: const Color(0xFF34A853),
-      surface: const Color(0xFF424242),
-      background: const Color(0xFF303030),
-      error: const Color(0xFFDC3545),
+    colorScheme: const ColorScheme.dark(
+      primary: Color(0xFF4285F4),
+      secondary: Color(0xFF34A853),
+      surface: Color(0xFF424242),
+      background: Color(0xFF303030),
+      error: Color(0xFFDC3545),
     ),
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
     elevatedButtonTheme: ElevatedButtonThemeData(

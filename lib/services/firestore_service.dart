@@ -24,7 +24,7 @@ class FirestoreService {
       return docRef.id;
     } catch (e) {
       print('Error al crear consulta: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -57,7 +57,7 @@ class FirestoreService {
       });
     } catch (e) {
       print('Error al actualizar estado de consulta: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -67,7 +67,7 @@ class FirestoreService {
       await _firestore.collection('consultas').doc(consultaId).delete();
     } catch (e) {
       print('Error al eliminar consulta: $e');
-      throw e;
+      rethrow;
     }
   }
 }

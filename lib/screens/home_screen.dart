@@ -1,87 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'login_screen.dart';
+import '../widgets/custom_button.dart';
+import '../controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      if (context.mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Error al cerrar sesión'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil de Usuario'),
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _signOut(context),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '¡Conexión Exitosa!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
-            const SizedBox(height: 24),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Correo electrónico:',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      user?.email ?? 'No disponible',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'UID:',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      user?.uid ?? 'No disponible',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ],
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo
+                Image.asset(
+                  'assets/images/logo.png',
+                  height: 150,
                 ),
-              ),
+                const SizedBox(height: 30),
+                
+                // Título
+                const Text(
+                  'Sistema de Consultas',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                
+                // Botones
+                CustomButton(
+                  text: 'Ingresar como Paciente',
+                  onPressed: () => _navigateToLogin(context, UserType.patient),
+                  color: Colors.blue,
+                ),
+                const SizedBox(height: 20),
+                
+                CustomButton(
+                  text: 'Ingresar como Doctor',
+                  onPressed: () => _navigateToLogin(context, UserType.doctor),
+                  color: Colors.green,
+                ),
+                const SizedBox(height: 20),
+                
+                CustomButton(
+                  text: 'Ingresar como Administrador',
+                  onPressed: () => _navigateToLogin(context, UserType.admin),
+                  color: Colors.purple,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
+    );
+  }
+
+  void _navigateToLogin(BuildContext context, UserType type) {
+    Navigator.pushNamed(
+      context,
+      '/login',
+      arguments: type,
     );
   }
 }

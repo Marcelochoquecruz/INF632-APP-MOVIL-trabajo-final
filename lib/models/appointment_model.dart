@@ -27,7 +27,7 @@ class AppointmentModel {
     this.notes,
     DateTime? createdAt,
     this.updatedAt,
-  }) : this.createdAt = createdAt ?? DateTime.now();
+  }) : createdAt = createdAt ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
     return {
