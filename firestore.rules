@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Función auxiliar para verificar si el usuario está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Función auxiliar para verificar si el usuario es administrador
+    function isAdmin() {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Reglas para la colección de doctores
+    match /doctors/{doctorId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Reglas para la colección de pacientes
+    match /patients/{patientId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Reglas para la colección de asignaciones doctor-paciente
+    match /doctor_patients/{assignmentId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Reglas para la colección de citas
+    match /appointments/{appointmentId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Reglas para la colección de historiales médicos
+    match /medical_records/{recordId} {
+      allow read: if isAuthenticated() && (
+        isAdmin() || 
+        isDoctor() || 
+        resource.data.patientId == request.auth.uid
+      );
+      allow write: if isAdmin() || isDoctor();
+    }
+
+    // Reglas para la colección de usuarios
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin();
+      allow update: if isAdmin() || request.auth.uid == userId;
+    }
+  }
+}
