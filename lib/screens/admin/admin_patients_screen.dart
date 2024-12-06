@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/ios_button.dart';
-import '../../widgets/ios_glass_button.dart';
 import 'admin_base_screen.dart';
 
 class AdminPatientsScreen extends StatefulWidget {
