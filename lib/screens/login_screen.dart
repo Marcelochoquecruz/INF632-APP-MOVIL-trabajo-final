@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_app_bar.dart';
+import '../routes/app_routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -50,12 +51,16 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      if (userType == UserType.admin) {
-        Navigator.pushReplacementNamed(context, '/admin-panel');
-      } else if (userType == UserType.doctor) {
-        Navigator.pushReplacementNamed(context, '/doctor-dashboard');
-      } else {
-        Navigator.pushReplacementNamed(context, '/welcome');
+      switch (userType) {
+        case UserType.admin:
+          Navigator.pushReplacementNamed(context, AppRoutes.adminPanel);
+          break;
+        case UserType.doctor:
+          Navigator.pushReplacementNamed(context, AppRoutes.doctorDashboard);
+          break;
+        case UserType.patient:
+          Navigator.pushReplacementNamed(context, AppRoutes.patientDashboard);
+          break;
       }
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
