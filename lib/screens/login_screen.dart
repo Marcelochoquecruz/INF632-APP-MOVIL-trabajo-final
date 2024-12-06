@@ -52,6 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (success && mounted) {
       if (userType == UserType.admin) {
         Navigator.pushReplacementNamed(context, '/admin-panel');
+      } else if (userType == UserType.doctor) {
+        Navigator.pushReplacementNamed(context, '/doctor-dashboard');
       } else {
         Navigator.pushReplacementNamed(context, '/welcome');
       }
