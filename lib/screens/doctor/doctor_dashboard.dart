@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'doctor_patients_screen.dart';
+import 'doctor_appointments_screen.dart';
+import 'doctor_profile_screen.dart';
 
 class DoctorDashboard extends StatefulWidget {
   const DoctorDashboard({Key? key}) : super(key: key);
@@ -158,7 +161,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       Icons.people,
                       Colors.indigo,
                       () {
-                        // TODO: Implementar navegación a la lista de pacientes
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorPatientsScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -169,7 +177,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       Icons.calendar_today,
                       Colors.teal,
                       () {
-                        // TODO: Implementar navegación a la gestión de citas
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorAppointmentsScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -184,7 +197,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       Icons.person,
                       Colors.purple,
                       () {
-                        // TODO: Implementar navegación al perfil del doctor
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorProfileScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -195,7 +213,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       Icons.history,
                       Colors.brown,
                       () {
-                        // TODO: Implementar navegación al historial médico
+                        // TODO: Implementar historial médico
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Historial médico en desarrollo'),
+                          ),
+                        );
                       },
                     ),
                   ),
