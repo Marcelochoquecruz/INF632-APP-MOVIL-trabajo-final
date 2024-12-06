@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import 'medical_history_screen.dart';
 import 'patient_medical_history_screen.dart';
+import 'appointment_request_screen.dart';
+import '../../services/notification_service.dart';
 
 class PatientDashboard extends StatefulWidget {
   const PatientDashboard({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class PatientDashboard extends StatefulWidget {
 class _PatientDashboardState extends State<PatientDashboard> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final NotificationService _notificationService = NotificationService();
   Map<String, dynamic>? _patientData;
   List<Map<String, dynamic>> _upcomingAppointments = [];
   String? _assignedDoctorName;
@@ -22,8 +24,13 @@ class _PatientDashboardState extends State<PatientDashboard> {
   @override
   void initState() {
     super.initState();
+    _initializeNotifications();
     _loadPatientData();
     _loadUpcomingAppointments();
+  }
+
+  Future<void> _initializeNotifications() async {
+    await _notificationService.initialize();
   }
 
   Future<void> _loadPatientData() async {
@@ -339,10 +346,10 @@ class _PatientDashboardState extends State<PatientDashboard> {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          // TODO: Implementar solicitud de cita
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Próximamente: Solicitud de citas'),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AppointmentRequestScreen(),
                             ),
                           );
                         },
