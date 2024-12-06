@@ -5,6 +5,7 @@ import '../screens/welcome_screen.dart';
 import '../screens/admin/admin_panel.dart';
 import '../screens/doctor/doctor_dashboard.dart';
 import '../screens/patient/patient_dashboard.dart';
+import '../screens/patient/medical_records_screen.dart';
 
 class AppRoutes {
   static const String home = '/';
@@ -13,6 +14,7 @@ class AppRoutes {
   static const String adminPanel = '/admin-panel';
   static const String doctorDashboard = '/doctor-dashboard';
   static const String patientDashboard = '/patient/dashboard';
+  static const String medicalRecords = '/medical-records';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -22,6 +24,7 @@ class AppRoutes {
       adminPanel: (_) => const AdminPanel(),
       doctorDashboard: (_) => const DoctorDashboard(),
       patientDashboard: (_) => const PatientDashboard(),
+      medicalRecords: (_) => const MedicalRecordsScreen(),
     };
   }
 }

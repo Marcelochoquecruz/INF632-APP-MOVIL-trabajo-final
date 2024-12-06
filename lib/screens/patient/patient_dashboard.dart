@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'medical_history_screen.dart';
+import 'patient_medical_history_screen.dart';
 
 class PatientDashboard extends StatefulWidget {
   const PatientDashboard({Key? key}) : super(key: key);
@@ -322,7 +323,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MedicalHistoryScreen(),
+                              builder: (context) => const PatientMedicalHistoryScreen(),
                             ),
                           );
                         },

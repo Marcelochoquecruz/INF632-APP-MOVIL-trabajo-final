@@ -214,6 +214,19 @@ class _AdminPanelState extends State<AdminPanel> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionCard(
+                          'Ver Historiales Médicos',
+                          Icons.medical_information,
+                          Colors.teal,
+                          () => Navigator.pushNamed(context, '/medical-records'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
