@@ -7,7 +7,7 @@ import 'doctor_profile_screen.dart';
 import 'doctor_medical_records_screen.dart';
 
 class DoctorDashboard extends StatefulWidget {
-  const DoctorDashboard({Key? key}) : super(key: key);
+  const DoctorDashboard({super.key});
 
   @override
   State<DoctorDashboard> createState() => _DoctorDashboardState();

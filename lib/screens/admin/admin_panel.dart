@@ -9,7 +9,7 @@ import 'assign_doctors_to_patients_screen.dart';
 import 'assign_schedules_screen.dart';
 
 class AdminPanel extends StatefulWidget {
-  const AdminPanel({Key? key}) : super(key: key);
+  const AdminPanel({super.key});
 
   @override
   State<AdminPanel> createState() => _AdminPanelState();

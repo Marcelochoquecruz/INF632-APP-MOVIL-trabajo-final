@@ -3,7 +3,7 @@ import '../../widgets/ios_button.dart';
 import 'admin_base_screen.dart';
 
 class AdminUsersScreen extends StatelessWidget {
-  const AdminUsersScreen({Key? key}) : super(key: key);
+  const AdminUsersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

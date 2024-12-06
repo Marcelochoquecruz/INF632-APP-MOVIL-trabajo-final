@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../services/notification_service.dart';
 
 class AppointmentRequestScreen extends StatefulWidget {
-  const AppointmentRequestScreen({Key? key}) : super(key: key);
+  const AppointmentRequestScreen({super.key});
 
   @override
   State<AppointmentRequestScreen> createState() => _AppointmentRequestScreenState();

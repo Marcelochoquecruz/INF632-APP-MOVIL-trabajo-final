@@ -8,12 +8,12 @@ class GradientCard extends StatelessWidget {
   final double? height;
 
   const GradientCard({
-    Key? key,
+    super.key,
     required this.child,
     this.padding,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

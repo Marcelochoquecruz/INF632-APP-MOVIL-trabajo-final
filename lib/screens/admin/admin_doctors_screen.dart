@@ -5,7 +5,7 @@ import '../../widgets/ios_glass_button.dart';
 import 'admin_base_screen.dart';
 
 class AdminDoctorsScreen extends StatefulWidget {
-  const AdminDoctorsScreen({Key? key}) : super(key: key);
+  const AdminDoctorsScreen({super.key});
 
   @override
   _AdminDoctorsScreenState createState() => _AdminDoctorsScreenState();

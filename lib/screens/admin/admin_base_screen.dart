@@ -10,11 +10,11 @@ class AdminBaseScreen extends StatefulWidget {
   final int currentIndex;
 
   const AdminBaseScreen({
-    Key? key,
+    super.key,
     required this.child,
     required this.title,
     required this.currentIndex,
-  }) : super(key: key);
+  });
 
   @override
   State<AdminBaseScreen> createState() => _AdminBaseScreenState();

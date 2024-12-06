@@ -7,7 +7,7 @@ import 'appointment_request_screen.dart';
 import '../../services/notification_service.dart';
 
 class PatientDashboard extends StatefulWidget {
-  const PatientDashboard({Key? key}) : super(key: key);
+  const PatientDashboard({super.key});
 
   @override
   State<PatientDashboard> createState() => _PatientDashboardState();
@@ -211,7 +211,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: ListTile(
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           backgroundColor: Colors.blue,
           child: Icon(Icons.calendar_today, color: Colors.white),
         ),

@@ -7,12 +7,12 @@ class IOSGradientButton extends StatelessWidget {
   final bool isSmall;
 
   const IOSGradientButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.icon,
     this.isSmall = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

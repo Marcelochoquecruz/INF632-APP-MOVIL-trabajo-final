@@ -9,13 +9,13 @@ class IOSFloatingButton extends StatelessWidget {
   final String? tooltip;
 
   const IOSFloatingButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.icon,
     this.badgeText,
     this.isSecondary = false,
     this.tooltip,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -112,10 +112,10 @@ class IOSFloatingButtonGroup extends StatelessWidget {
   final double spacing;
 
   const IOSFloatingButtonGroup({
-    Key? key,
+    super.key,
     required this.buttons,
     this.spacing = 16,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

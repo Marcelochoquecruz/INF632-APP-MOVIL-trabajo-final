@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
 class DoctorAppointmentsScreen extends StatefulWidget {
-  const DoctorAppointmentsScreen({Key? key}) : super(key: key);
+  const DoctorAppointmentsScreen({super.key});
 
   @override
   State<DoctorAppointmentsScreen> createState() => _DoctorAppointmentsScreenState();

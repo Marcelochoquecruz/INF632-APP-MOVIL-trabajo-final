@@ -6,7 +6,7 @@ import 'assign_doctors_to_patients_screen.dart';
 import 'assign_schedules_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
-  const AdminDashboardScreen({Key? key}) : super(key: key);
+  const AdminDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

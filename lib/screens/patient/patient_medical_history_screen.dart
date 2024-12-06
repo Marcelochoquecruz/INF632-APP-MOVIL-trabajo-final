@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class PatientMedicalHistoryScreen extends StatefulWidget {
-  const PatientMedicalHistoryScreen({Key? key}) : super(key: key);
+  const PatientMedicalHistoryScreen({super.key});
 
   @override
   State<PatientMedicalHistoryScreen> createState() => _PatientMedicalHistoryScreenState();

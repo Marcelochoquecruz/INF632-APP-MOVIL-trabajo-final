@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AssignDoctorsToPatients extends StatefulWidget {
-  const AssignDoctorsToPatients({Key? key}) : super(key: key);
+  const AssignDoctorsToPatients({super.key});
 
   @override
   State<AssignDoctorsToPatients> createState() => _AssignDoctorsToPatientsState();

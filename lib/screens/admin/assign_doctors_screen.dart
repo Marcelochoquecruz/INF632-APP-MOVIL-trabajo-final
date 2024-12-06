@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AssignDoctorsScreen extends StatefulWidget {
-  const AssignDoctorsScreen({Key? key}) : super(key: key);
+  const AssignDoctorsScreen({super.key});
 
   @override
   State<AssignDoctorsScreen> createState() => _AssignDoctorsScreenState();

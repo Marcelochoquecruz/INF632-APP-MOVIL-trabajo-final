@@ -4,7 +4,7 @@ import '../widgets/ios_gradient_button.dart';
 import '../widgets/gradient_background.dart';
 
 class ExampleButtonsScreen extends StatelessWidget {
-  const ExampleButtonsScreen({Key? key}) : super(key: key);
+  const ExampleButtonsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

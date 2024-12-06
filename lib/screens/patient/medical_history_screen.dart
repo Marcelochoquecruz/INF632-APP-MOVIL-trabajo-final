@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
 class MedicalHistoryScreen extends StatefulWidget {
-  const MedicalHistoryScreen({Key? key}) : super(key: key);
+  const MedicalHistoryScreen({super.key});
 
   @override
   State<MedicalHistoryScreen> createState() => _MedicalHistoryScreenState();

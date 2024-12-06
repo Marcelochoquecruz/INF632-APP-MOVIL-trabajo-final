@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MedicalRecordsScreen extends StatefulWidget {
-  const MedicalRecordsScreen({Key? key}) : super(key: key);
+  const MedicalRecordsScreen({super.key});
 
   @override
   State<MedicalRecordsScreen> createState() => _MedicalRecordsScreenState();
