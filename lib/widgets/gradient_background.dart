@@ -6,10 +6,10 @@ class GradientBackground extends StatelessWidget {
   final bool useGradient;
 
   const GradientBackground({
-    Key? key,
+    super.key,
     required this.child,
     this.useGradient = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class IOSButton extends StatelessWidget {
   final double? width;
 
   const IOSButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.icon,
@@ -19,7 +19,7 @@ class IOSButton extends StatelessWidget {
     this.isSmall = false,
     this.isOutlined = false,
     this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../../widgets/ios_floating_button.dart';
 import 'admin_base_screen.dart';
 
 class AdminSettingsScreen extends StatelessWidget {
-  const AdminSettingsScreen({Key? key}) : super(key: key);
+  const AdminSettingsScreen({super.key});
 
   Future<void> _simulateLoading() async {
     await Future.delayed(const Duration(seconds: 2));

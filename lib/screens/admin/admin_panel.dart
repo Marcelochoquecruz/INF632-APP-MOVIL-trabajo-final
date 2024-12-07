@@ -5,9 +5,11 @@ import 'register_doctor_screen.dart';
 import 'register_patient_screen.dart';
 import 'view_doctors_screen.dart';
 import 'view_patients_screen.dart';
+import 'assign_doctors_to_patients_screen.dart';
+import 'assign_schedules_screen.dart';
 
 class AdminPanel extends StatefulWidget {
-  const AdminPanel({Key? key}) : super(key: key);
+  const AdminPanel({super.key});
 
   @override
   State<AdminPanel> createState() => _AdminPanelState();
@@ -176,6 +178,51 @@ class _AdminPanelState extends State<AdminPanel> {
                               builder: (context) => const ViewPatientsScreen(),
                             ),
                           ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionCard(
+                          'Asignar Doctores',
+                          Icons.assignment_ind,
+                          Colors.indigo,
+                          () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AssignDoctorsToPatients(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildActionCard(
+                          'Asignar Horarios',
+                          Icons.schedule,
+                          Colors.teal,
+                          () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AssignSchedulesScreen(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionCard(
+                          'Ver Historiales Médicos',
+                          Icons.medical_information,
+                          Colors.teal,
+                          () => Navigator.pushNamed(context, '/medical-records'),
                         ),
                       ),
                     ],

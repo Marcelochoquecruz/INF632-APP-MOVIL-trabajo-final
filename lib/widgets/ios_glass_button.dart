@@ -9,13 +9,13 @@ class IOSGlassButton extends StatelessWidget {
   final double? width;
 
   const IOSGlassButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.icon,
     this.isSmall = false,
     this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,12 +8,12 @@ class IOSAnimatedButton extends StatefulWidget {
   final bool isSecondary;
 
   const IOSAnimatedButton({
-    Key? key,
+    super.key,
     required this.text,
     this.icon,
     required this.onPressed,
     this.isSecondary = false,
-  }) : super(key: key);
+  });
 
   @override
   State<IOSAnimatedButton> createState() => _IOSAnimatedButtonState();

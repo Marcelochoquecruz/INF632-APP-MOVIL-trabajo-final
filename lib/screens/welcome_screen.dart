@@ -4,7 +4,7 @@ import '../controllers/auth_controller.dart';
 import '../widgets/custom_app_bar.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   String _getUserTypeText(UserType type) {
     switch (type) {

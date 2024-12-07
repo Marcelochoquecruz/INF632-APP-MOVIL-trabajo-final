@@ -1,14 +1,60 @@
+import 'dart:ui' as ui;
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:ui';
-import 'dart:math';
-import 'admin_doctors_screen.dart';
-import 'admin_patients_screen.dart';
-import 'assign_doctors_to_patients_screen.dart';
-import 'assign_schedules_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'doctor_patients_screen.dart';
+import 'doctor_appointments_screen.dart';
+import 'doctor_profile_screen.dart';
+import 'doctor_medical_records_screen.dart';
 
-class AdminDashboardScreen extends StatelessWidget {
-  const AdminDashboardScreen({super.key});
+class DoctorDashboard extends StatefulWidget {
+  const DoctorDashboard({super.key});
+
+  @override
+  State<DoctorDashboard> createState() => _DoctorDashboardState();
+}
+
+class _DoctorDashboardState extends State<DoctorDashboard> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  int patientCount = 0;
+  int appointmentCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounts();
+  }
+
+  Future<void> _loadCounts() async {
+    final doctorId = _auth.currentUser?.uid;
+    if (doctorId == null) return;
+
+    // Contar pacientes asignados
+    final patientsQuery = await _firestore
+        .collection('doctor_patients')
+        .where('doctorId', isEqualTo: doctorId)
+        .get();
+    
+    // Contar citas
+    final appointmentsQuery = await _firestore
+        .collection('appointments')
+        .where('doctorId', isEqualTo: doctorId)
+        .get();
+
+    setState(() {
+      patientCount = patientsQuery.docs.length;
+      appointmentCount = appointmentsQuery.docs.length;
+    });
+  }
+
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.of(context).pushReplacementNamed('/login');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +75,14 @@ class AdminDashboardScreen extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.purple[700]!,
-                    Colors.purple[500]!,
+                    Colors.blue[600]!,
+                    Colors.blue[400]!,
                   ],
                 ),
               ),
               child: FlexibleSpaceBar(
                 title: const Text(
-                  'Panel Administrativo',
+                  'Panel del Doctor',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -47,7 +93,7 @@ class AdminDashboardScreen extends StatelessWidget {
                   children: [
                     // Patrón de fondo
                     CustomPaint(
-                      painter: AdminBubblePatternPainter(),
+                      painter: BubblePatternPainter(),
                       child: Container(),
                     ),
                     // Overlay gradient
@@ -67,10 +113,16 @@ class AdminDashboardScreen extends StatelessWidget {
                 ),
               ),
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.logout, color: Colors.white),
+                onPressed: _logout,
+              ),
+            ],
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -82,114 +134,86 @@ class AdminDashboardScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       children: [
                         _buildStatsCard(
-                          'Doctores',
-                          '3',
-                          Icons.medical_services,
+                          'Pacientes',
+                          patientCount.toString(),
+                          Icons.people,
                           Colors.blue,
                           [Colors.blue[400]!, Colors.blue[600]!],
                         ),
                         const SizedBox(width: 16),
                         _buildStatsCard(
-                          'Pacientes',
-                          '2',
-                          Icons.people,
+                          'Citas',
+                          appointmentCount.toString(),
+                          Icons.calendar_today,
                           Colors.green,
                           [Colors.green[400]!, Colors.green[600]!],
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 24),
                   
-                  // Título de sección
+                  // Sección de acciones rápidas
                   const Text(
-                    'Gestión',
+                    'Acciones Rápidas',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
                   
                   // Grid de acciones
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 1.1,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 1.3,
                     children: [
                       _buildActionCard(
-                        context,
-                        'Registrar Doctor',
-                        Icons.person_add,
-                        Colors.blue,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdminDoctorsScreen(),
-                          ),
-                        ),
-                      ),
-                      _buildActionCard(
-                        context,
-                        'Registrar Paciente',
-                        Icons.person_add,
-                        Colors.green,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdminPatientsScreen(),
-                          ),
-                        ),
-                      ),
-                      _buildActionCard(
-                        context,
-                        'Ver Doctores',
-                        Icons.people,
-                        Colors.orange,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdminDoctorsScreen(),
-                          ),
-                        ),
-                      ),
-                      _buildActionCard(
-                        context,
                         'Ver Pacientes',
                         Icons.people,
-                        Colors.purple,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdminPatientsScreen(),
-                          ),
-                        ),
-                      ),
-                      _buildActionCard(
-                        context,
-                        'Asignar Doctores',
-                        Icons.assignment_ind,
                         Colors.indigo,
                         () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AssignDoctorsToPatients(),
+                            builder: (context) => const DoctorPatientsScreen(),
                           ),
                         ),
                       ),
                       _buildActionCard(
-                        context,
-                        'Asignar Horarios',
-                        Icons.schedule,
+                        'Gestionar Citas',
+                        Icons.calendar_today,
                         Colors.teal,
                         () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AssignSchedulesScreen(),
+                            builder: (context) => const DoctorAppointmentsScreen(),
+                          ),
+                        ),
+                      ),
+                      _buildActionCard(
+                        'Mi Perfil',
+                        Icons.person,
+                        Colors.purple,
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorProfileScreen(),
+                          ),
+                        ),
+                      ),
+                      _buildActionCard(
+                        'Historial Médico',
+                        Icons.history,
+                        Colors.orange,
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorMedicalRecordsScreen(),
                           ),
                         ),
                       ),
@@ -226,7 +250,7 @@ class AdminDashboardScreen extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -262,24 +286,13 @@ class AdminDashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionCard(BuildContext context, String title, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionCard(String title, IconData icon, Color color, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              color.withOpacity(0.1),
-              color.withOpacity(0.05),
-            ],
-          ),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: color.withOpacity(0.2),
-            width: 1,
-          ),
           boxShadow: [
             BoxShadow(
               color: color.withOpacity(0.1),
@@ -292,39 +305,20 @@ class AdminDashboardScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    color.withOpacity(0.2),
-                    color.withOpacity(0.1),
-                  ],
-                ),
+                color: color.withOpacity(0.1),
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: color.withOpacity(0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
               child: Icon(icon, color: color, size: 32),
             ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.3,
-                ),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: TextStyle(
+                color: color.withOpacity(0.8),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
@@ -334,7 +328,7 @@ class AdminDashboardScreen extends StatelessWidget {
   }
 }
 
-class AdminBubblePatternPainter extends CustomPainter {
+class BubblePatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
