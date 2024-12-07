@@ -14,7 +14,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  // Inicializar servicio de notificaciones
   final notificationService = NotificationService();
   await notificationService.initialize();
 
